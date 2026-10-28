@@ -1,0 +1,5 @@
+# gothic room variants
+gothic bedroom, candles, stained glass window, dark wood furniture
+gothic cathedral interior, tall arches, candlelight, dust particles
+dark castle hall, chandelier, red velvet curtains, stone walls
+gothic library, bookshelves, candles, moonlight through window

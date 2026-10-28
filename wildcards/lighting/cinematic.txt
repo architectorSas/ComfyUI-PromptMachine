@@ -1,0 +1,4 @@
+cinematic lighting, rim light, volumetric lighting
+dramatic lighting, chiaroscuro, high contrast
+soft lighting, backlighting, light particles
+moonlight, cold color palette, god rays

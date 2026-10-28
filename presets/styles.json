@@ -1,0 +1,46 @@
+{
+  "none": {
+    "positive": "{prompt}",
+    "negative": "{prompt}"
+  },
+  "Illustrious Masterpiece": {
+    "positive": "masterpiece, best quality, amazing quality, very aesthetic, absurdres, newest, {prompt}",
+    "negative": "{prompt}, worst quality, low quality, bad anatomy, bad hands, jpeg artifacts, watermark, signature"
+  },
+  "Anime Screencap": {
+    "positive": "anime screencap, anime coloring, {prompt}, masterpiece, best quality",
+    "negative": "{prompt}, 3d, realistic, photo, worst quality, low quality"
+  },
+  "Gothic Dark Fantasy": {
+    "positive": "{prompt}, gothic, dark fantasy, dramatic lighting, moody atmosphere, intricate details, masterpiece, best quality",
+    "negative": "{prompt}, bright, cheerful, low quality, blurry"
+  },
+  "Cinematic": {
+    "positive": "{prompt}, cinematic lighting, depth of field, dynamic angle, film grain, masterpiece, best quality",
+    "negative": "{prompt}, flat lighting, low quality, blurry"
+  },
+  "Watercolor": {
+    "positive": "{prompt}, watercolor (medium), traditional media, soft colors, painterly",
+    "negative": "{prompt}, 3d, photo, harsh lines, low quality"
+  },
+  "Cyberpunk Neon": {
+    "positive": "{prompt}, cyberpunk, neon lights, night, city lights, glowing, vibrant colors, masterpiece",
+    "negative": "{prompt}, daylight, dull colors, low quality"
+  },
+  "Flat Color Lineart": {
+    "positive": "{prompt}, flat color, clean lineart, simple shading, best quality",
+    "negative": "{prompt}, realistic, gradient, noise, low quality"
+  },
+  "Semi-Realistic": {
+    "positive": "{prompt}, semi-realistic, detailed skin, realistic lighting, highres, masterpiece, best quality",
+    "negative": "{prompt}, cartoon, chibi, worst quality, low quality"
+  },
+  "Retro 90s Anime": {
+    "positive": "{prompt}, 1990s (style), retro artstyle, cel shading, film grain",
+    "negative": "{prompt}, modern, 3d, low quality"
+  },
+  "Chibi Cute": {
+    "positive": "{prompt}, chibi, cute, big head, pastel colors, simple background",
+    "negative": "{prompt}, realistic, detailed anatomy, low quality"
+  }
+}
