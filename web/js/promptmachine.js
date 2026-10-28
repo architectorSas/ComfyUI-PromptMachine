@@ -32,7 +32,10 @@ function buildPanel() {
   const save = el("button", { background: "#3a5a8a", color: "#fff", border: "none", borderRadius: "4px",
     padding: "3px 8px", cursor: "pointer", fontSize: "11px" }, "Save current");
   save.addEventListener("click", saveCurrent);
-  head.append(P.title, save);
+  const x = el("button", { background: "transparent", color: "#bbb", border: "none", cursor: "pointer", fontSize: "16px", lineHeight: "1", padding: "0 2px" }, "\u2715");
+  x.title = "Close";
+  x.addEventListener("click", (e) => { e.stopPropagation(); const t = P.ta; closePanel(); try { t && t.blur(); } catch (er) {} });
+  head.append(P.title, save, x);
   P.search = el("input", { margin: "6px 8px", padding: "4px 6px", background: "#151515", color: "#ddd",
     border: "1px solid #444", borderRadius: "4px", fontSize: "12px" });
   P.search.placeholder = "Filter snippets...";
@@ -194,10 +197,38 @@ function insertTag() {
   } catch (e) { console.warn("[PromptMachine]", e); }
 }
 
+function makeResizable(ta, node, section) {
+  const w = (node.widgets || []).find((x) => x.name === section);
+  if (!w) return;
+  ta.style.resize = "vertical"; ta.style.minHeight = "30px";
+  const key = "pm_h_" + section;
+  node.properties = node.properties || {};
+  let h = node.properties[key] || 0;
+  const apply = () => {
+    if (h) { ta.style.height = h + "px"; ta.style.flex = "none"; }
+    w.computeSize = (width) => [width, (h || ta.offsetHeight || 50) + 10];
+    w.options = w.options || {};
+    if (h) { w.options.getMinHeight = () => h + 10; w.options.getMaxHeight = () => h + 10; w.options.getHeight = () => h + 10; }
+  };
+  apply();
+  let t;
+  new ResizeObserver(() => {
+    if (!ta.__pmDrag) return;
+    clearTimeout(t);
+    t = setTimeout(() => {
+      h = Math.round(ta.offsetHeight); node.properties[key] = h; apply();
+      try { const sz = node.computeSize(); node.setSize([node.size[0], sz[1]]); node.setDirtyCanvas(true, true); } catch (e) {}
+    }, 120);
+  }).observe(ta);
+  ta.addEventListener("pointerdown", (e) => { const r = ta.getBoundingClientRect(); if (e.clientY > r.bottom - 16 && e.clientX > r.right - 16) ta.__pmDrag = true; });
+  window.addEventListener("pointerup", () => { setTimeout(() => (ta.__pmDrag = false), 300); });
+}
+
 function attachAutocomplete(ta, node, section) {
   if (!ta || ta.__pmAC) return;
   ta.__pmAC = true;
   try { if (!ta.placeholder) ta.placeholder = section; ta.title = section; } catch (e) {}
+  try { makeResizable(ta, node, section); } catch (e) { console.warn("[PromptMachine] resize", e); }
   ta.addEventListener("focus", () => openPanel(node, ta, section));
   ta.addEventListener("click", () => { if (P.ta !== ta || P.el.style.display === "none") openPanel(node, ta, section); });
   ta.addEventListener("input", (e) => {
